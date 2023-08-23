@@ -22,6 +22,6 @@ from video.views import IndexView, VideoView, UserView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', IndexView.as_view(), name='index'),
-    path('video/', VideoView.as_view(), name='index'),
-    path('meus-downloads', UserView.as_view())
+    path('video/', VideoView.as_view(), name='video'),
+    path('meus-downloads/', UserView.as_view())
 ]
