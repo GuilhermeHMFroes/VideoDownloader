@@ -26,26 +26,52 @@
             margin-top: auto;
         }
 
-        navbar {
-            background-color: #226900;
-            text-color: white;
+        .navbar {
+            background-color: #226900 !important;
+            color: white;
         }
+
+        .btn-custom {
+        background-color: #226900;
+        color: white;
+    }
+
+    .custom-navbar {
+        padding-top: 0.2rem; /* Ajuste conforme necessário */
+        padding-bottom: 0.2rem; /* Ajuste conforme necessário */
+    }
+
+    .btn-custom:hover {
+        background-color: #226900; /* Mantém a mesma cor de fundo */
+        color: black; /* Muda a cor do texto para preto */
+    }
+
+    .form-control {
+        background: #D9D9D9;
+    }
+
+    .form-select {
+        background: #D9D9D9;
+    }
     </style>
 </head>
 <body>
     
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark custom-navbar">
         <div class="container">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item"> <a class="nav-item nav-link" id="home" href="/">Home</a> </li>
-                    <li class="nav-item"> <a class="nav-item nav-link" id="alunos" href="/meus-downloads">Meus Downloads </a> </li>
-                    <li class="nav-item d-flex-end"> <a class="nav-item nav-link" id="alunos" href="/login"> Login</a> </li>
+                    <li class="nav-item"> <a class="nav-item nav-link" id="home" href="/">Video Downloader</a> </li>
+                </ul>
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    <li class="nav-item"> <a class="nav-item nav-link" id="alunos" href="/meus-downloads">Meus Downloads</a> </li>
+                    <li class="nav-item ms-auto"> <a class="nav-item nav-link" id="alunos" href="/login">Login</a> </li>
                 </ul>
             </div>
+            
         </div>
     </nav>
 
