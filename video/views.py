@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
 
+from .models import DownloadedVideos
 from .download import downloader
+
+from pytube import YouTube
 
 # Create your views here.
 class IndexView(TemplateView):
@@ -20,6 +23,20 @@ class IndexView(TemplateView):
         # Se o formulário foi enviado, chame a função de download e retorne a saída para o template
         video_url = request.POST.get('video_url')
         formato = request.POST.get('formato')
+
+        youtube_video = YouTube(video_url)
+
+
+        DownloadedVideos.objects.create(
+            thumbnail = youtube_video.thumbnail_url,
+            title = youtube_video.title,
+            author = youtube_video.author,
+            description = youtube_video.description,
+            views = youtube_video.views,
+            duration = youtube_video.length,
+            url = video_url,
+            formato = formato,
+        )
         
         return downloader(video_url, formato)
 
