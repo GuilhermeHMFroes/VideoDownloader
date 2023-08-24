@@ -47,15 +47,22 @@ from django.http import HttpResponse
 from pytube import YouTube
 from io import BytesIO
 
-def downloader(request):
-    video_url = "https://www.youtube.com/watch?v=2oX2FSv4Rys"
+def downloader(video_url, formato, content_type):
+    # video_url = "https://www.youtube.com/watch?v=2oX2FSv4Rys"
+
+    # TODO: Diferenciar downloads para quando suportar conversao para mp3. 
+    # Por enquanto está ignorando o formato.
+    if formato == "mp4":
+        pass
+    elif formato == "mp3":
+        pass
 
     try:
         youtube_video = YouTube(video_url)
         video_stream = youtube_video.streams.get_highest_resolution()
 
-        response = HttpResponse(content_type='video/mp4')
-        response['Content-Disposition'] = f'attachment; filename="{youtube_video.title}.mp4"'
+        response = HttpResponse(content_type=content_type)
+        response['Content-Disposition'] = f'attachment; filename="{youtube_video.title}.{content_type}"'
 
         buffer = BytesIO()
         video_stream.stream_to_buffer(buffer)

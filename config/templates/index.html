@@ -4,35 +4,33 @@
 
 {% block page_content %}
 <div class="container">
-    <form method="post">
-        {% csrf_token %}
-        <label for="url">URL do Vídeo:</label>
-        <input type="text" name="url" required>
-        <button type="submit">Baixar</button>
-    </form>
 
-    {{ index_content | safe }}
     <div class="text-center mt-5">
         <h2>Pesquise o vídeo que deseja</h2>
+
         <form class="d-flex justify-content-center mt-3">
             <div class="col-sm-8 col-md-6 col-lg-7">
-                <input class="form-control form-control-sm me-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
+                <input class="form-control form-control-sm me-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar" disabled>
             </div>
-            <button class="btn btn-custom btn-sm mx-3" type="submit">Buscar</button>
+            <button class="btn btn-custom btn-sm mx-3" type="submit" disabled> Buscar </button>
         </form>
+
         <div class="my-4">
             <h2 class="text-center">ou</h2>
         </div>
+        
         <h2>Baixe seus vídeos e músicas favoritas</h2>
-        <form class="d-flex justify-content-center mt-3">
+
+        <form method="POST" class="d-flex justify-content-center mt-3">
+            {% csrf_token %}
             <div class="col-sm-8 col-md-6 col-lg-5">
-                <input class="form-control form-control-sm mb-2" type="search" placeholder="Insira o link do vídeo que deseja baixar" aria-label="Pesquisar">
+                <input class="form-control form-control-sm mb-2" type="text" placeholder="Insira o link do vídeo que deseja baixar" aria-label="Pesquisar" name="video_url" required>
             </div>
             <div class="col-sm-8 col-md-6 col-lg-2">
-                <select class="form-select form-select-sm mb-2 mx-3" aria-label="Selecione o formato">
+                <select class="form-select form-select-sm mb-2 mx-3" aria-label="Selecione o formato" name="formato">
                     <option selected>Selecione o formato</option>
-                    <option value="mp3_128k">MP3 128k</option>
-                    <option value="mp4-mp4">MP4</option>
+                    <option value="mp3" disabled>MP3 128k (indisponível)</option>
+                    <option value="mp4" selected>MP4</option>
                     <!--
                     <option value="mp4-720p">MP4 720p</option>
                     <option value="mp4-480p">MP4 480p</option>
@@ -41,7 +39,8 @@
             </div>
             <button class="btn btn-custom btn-sm mx-4" type="submit">Baixar</button>
         </form>
-        <img src="https://img.freepik.com/vetores-premium/pessoas-fazendo-upload-de-arquivos-multimidia-via-computador-musica-e-video-disponiveis-para-download-para-ilustracao-vetorial-plana-de-mulher-e-homem-minusculos-conceito-de-torrent-para-banner-design-de-site-ou-pagina-de-destino_179970-6866.jpg?w=1060" class="img-fluid" width="400">
+
+        <img src="https://img.freepik.com/vetores-premium/pessoas-fazendo-upload-de-arquivos-multimidia-via-computador-musica-e-video-disponiveis-para-download-para-ilustracao-vetorial-plana-de-mulher-e-homem-minusculos-conceito-de-torrent-para-banner-design-de-site-ou-pagina-de-destino_179970-6866.jpg?w=1060" class="img-fluid" width="600">
 
     </div>
 </div>

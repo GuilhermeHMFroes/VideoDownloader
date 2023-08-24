@@ -18,7 +18,16 @@ class IndexView(TemplateView):
     
     def post(self, request):
         # Se o formulário foi enviado, chame a função de download e retorne a saída para o template
-        return downloader(request)
+        video_url = request.POST.get('video_url')
+        formato = request.POST.get('formato')
+        
+        content_type = ''
+        if formato == 'mp4':
+            content_type = 'video/mp4'
+        elif formato == 'mp3':
+            content_type == 'audio/mpeg'
+        
+        return downloader(video_url, formato, content_type)
 
 
 class VideoView(TemplateView):
