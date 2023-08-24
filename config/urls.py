@@ -17,11 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from video_downloader import views
+from video.views import IndexView, VideoView, UserView
 
 urlpatterns = [
 
     path('admin/', admin.site.urls),
-    path('', views.index),
-    path('meus-downloads', views.meus_downloads)
+    path('', IndexView.as_view(), name='index'),
+    path('video/', VideoView.as_view(), name='video'),
+    path('meus-downloads/', UserView.as_view())
 ]
