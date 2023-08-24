@@ -20,6 +20,7 @@ from django.urls import path
 from video_downloader import views
 
 urlpatterns = [
+
     path('admin/', admin.site.urls),
     path('', views.index),
     path('meus-downloads', views.meus_downloads)

@@ -4,6 +4,13 @@
 
 {% block page_content %}
 <div class="container">
+    <form method="post">
+        {% csrf_token %}
+        <label for="url">URL do Vídeo:</label>
+        <input type="text" name="url" required>
+        <button type="submit">Baixar</button>
+    </form>
+
     {{ index_content | safe }}
     <div class="text-center mt-5">
         <h2>Pesquise o vídeo que deseja</h2>
