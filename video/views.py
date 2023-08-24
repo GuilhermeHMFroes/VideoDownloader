@@ -21,13 +21,7 @@ class IndexView(TemplateView):
         video_url = request.POST.get('video_url')
         formato = request.POST.get('formato')
         
-        content_type = ''
-        if formato == 'mp4':
-            content_type = 'video/mp4'
-        elif formato == 'mp3':
-            content_type == 'audio/mpeg'
-        
-        return downloader(video_url, formato, content_type)
+        return downloader(video_url, formato)
 
 
 class VideoView(TemplateView):
