@@ -3,6 +3,7 @@ from django.db import models
 
 # Create your models here.
 class DownloadedVideos(models.Model):
+    criado_em = models.DateTimeField(auto_now_add=True, blank=True)
     thumbnail = models.CharField(max_length=512)
     title = models.CharField(max_length=255)
     author = models.CharField(max_length=255)

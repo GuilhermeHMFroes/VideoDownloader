@@ -92,7 +92,11 @@ class UserView(TemplateView):
             ### Parameters:
             - user_id: int
         """
+        downloaded_videos = DownloadedVideos.objects.all()
 
-        context = {}
+        context = {
+            'downloaded_videos': downloaded_videos,
+            'total_videos_downloaded': downloaded_videos.__len__,
+        }
 
         return render(request, 'meus-downloads.html', context)
