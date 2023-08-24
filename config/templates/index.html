@@ -6,7 +6,18 @@
 {% block page_content %}
 
 <div class="container">
-    {{ index_content | safe}}
+
+
+<form method="post">
+    {% csrf_token %}
+    <label for="url">URL do Vídeo:</label>
+    <input type="text" name="url" required>
+    <button type="submit">Baixar</button>
+</form>
+
 </div>
+
+
+
 
 {% endblock %}
