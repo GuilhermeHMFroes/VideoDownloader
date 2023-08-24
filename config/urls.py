@@ -23,5 +23,5 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
     path('', views.index),
-
+    path('meus-downloads', views.meus_downloads)
 ]

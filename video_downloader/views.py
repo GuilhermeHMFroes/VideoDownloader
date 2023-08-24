@@ -13,4 +13,8 @@ def index(request):
 
     return render(request, 'index.html')
 
+def meus_downloads(request):
 
+    context = {}
+
+    return render(request, 'meus-downloads.html', context)

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block page_title %} Video Downloader {% endblock %}
+
+{% block page_content %}
+
+<div class="container">
+    <div class="text-center mt-5 ">
+        <h2>Meus Downloads</h2>
+    </div>
+    <div class="text-center mt-5 ">
+        <table class="table table-rounded table-sm  mx-auto " style="max-width: 70%;">
+            <thead>
+                <tr style="background-color: #226900; color: white;">
+                    <th>#</th>
+                    <th>Título</th>
+                    <th>Link</th>
+                    <th>Formato</th>
+                    <th>Baixado Em</th>
+                    <th></th> <!-- Coluna vazia para o botão "Baixar Novamente" -->
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Exemplo de uma linha da tabela -->
+                <tr>
+                    <td>1</td>
+                    <td>Título do Vídeo 1</td>
+                    <td>https://www.example.com/video1</td>
+                    <td>MP4 1080p</td>
+                    <td>2023-07-15 10:30 AM</td>
+                    <td>
+                        <button class="btn btn-custom btn-sm mx-3">Baixar Novamente</button>
+                    </td>
+                </tr>
+                
+                <!-- Adicione mais linhas conforme necessário -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
