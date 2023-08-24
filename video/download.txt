@@ -1,0 +1,39 @@
+"""
+
+Downloader
+Parametros para Download: file_url e file_type ('mp4', 'mp3_128k')
+>> Retorna link para download do arquivo.
+
+"""
+
+from django.shortcuts import render
+from pytube import YouTube
+import os
+import tempfile
+
+def downloader(request):
+    if request.method == 'POST':
+        url = request.POST.get('url')
+
+        try:
+            video = YouTube(url)
+            stream = video.streams.get_highest_resolution()
+
+            # Caminho para a pasta temporária
+            temp_folder = os.path.join(os.getcwd(), 'temp')
+            if not os.path.exists(temp_folder):
+                os.mkdir(temp_folder)
+
+            output_path = os.path.join(temp_folder)
+
+            stream.download(output_path)
+            request.session[f'download_path/{video.title}.mp4'] = output_path  # Armazena o caminho temporário na sessão
+
+            return render(request, 'download.html', {'show_download_button': True})
+        except Exception as e:
+            message = f"Erro durante o download: {str(e)}"
+            return render(request, 'download.html', {'message': message})
+
+    return render(request, 'download.html')
+
+

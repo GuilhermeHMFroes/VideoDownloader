@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
 
+from .download import downloader
+
 # Create your views here.
 class IndexView(TemplateView):
     def get(self, request):
@@ -13,6 +15,10 @@ class IndexView(TemplateView):
         }
 
         return render(request, 'index.html', context)
+    
+    def post(self, request):
+        # Se o formulário foi enviado, chame a função de download e retorne a saída para o template
+        return downloader(request)
 
 
 class VideoView(TemplateView):
