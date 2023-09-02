@@ -6,9 +6,11 @@ from .download import downloader
 
 from pytube import YouTube
 
+import asyncio
+
 # Create your views here.
 class IndexView(TemplateView):
-    def get(self, request):
+    async def get(self, request):
         """ View Index.
             Exibe o arquivo localizado em `/config/templates/index.html`
         """
@@ -19,26 +21,24 @@ class IndexView(TemplateView):
 
         return render(request, 'index.html', context)
     
-    def post(self, request):
+    async def post(self, request):
         # Se o formulário foi enviado, chame a função de download e retorne a saída para o template
         video_url = request.POST.get('video_url')
         formato = request.POST.get('formato')
 
-        youtube_video = YouTube(video_url)
-
-
-        DownloadedVideos.objects.create(
-            thumbnail = youtube_video.thumbnail_url,
-            title = youtube_video.title,
-            author = youtube_video.author,
-            description = youtube_video.description,
-            views = youtube_video.views,
-            duration = youtube_video.length,
-            url = video_url,
-            formato = formato,
-        )
+        # youtube_video = YouTube(video_url)
+        # DownloadedVideos.objects.create(
+        #     thumbnail = youtube_video.thumbnail_url,
+        #     title = youtube_video.title,
+        #     author = youtube_video.author,
+        #     description = youtube_video.description,
+        #     views = youtube_video.views,
+        #     duration = youtube_video.length,
+        #     url = video_url,
+        #     formato = formato,
+        # )
         
-        return downloader(video_url, formato)
+        return await asyncio.to_thread(downloader, video_url, formato)
 
 
 class VideoView(TemplateView):
