@@ -38,7 +38,8 @@ class IndexView(TemplateView):
         #     formato = formato,
         # )
         
-        return await asyncio.to_thread(downloader, video_url, formato)
+        response = await asyncio.to_thread(downloader, video_url, formato)
+        return response
 
 
 class VideoView(TemplateView):
