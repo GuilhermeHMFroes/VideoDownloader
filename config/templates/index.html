@@ -10,9 +10,9 @@
 
         <form class="d-flex justify-content-center mt-3">
             <div class="col-sm-8 col-md-6 col-lg-7">
-                <input class="form-control form-control-sm me-2" type="search" placeholder="Funcionalidade em desenvolvimento..." aria-label="Pesquisar" disabled>
+                <input class="form-control form-control-sm me-2" type="search" placeholder="Funcionalidade em desenvolvimento..." aria-label="Pesquisar" name="search_term">
             </div>
-            <button class="btn btn-custom btn-sm mx-3" type="submit" disabled> Buscar </button>
+            <button class="btn btn-custom btn-sm mx-3" type="submit" id="btnBuscar" onclick="gtag('event', 'search_button', {'event_category': 'Button','event_label': 'Search Button'});"> Buscar </button>
         </form>
 
         <div class="my-4">
@@ -21,6 +21,7 @@
         
         <h2>Baixe seus vídeos e músicas favoritas</h2>
 
+        <!-- Formulario de Busca -->
         <form async method="POST" class="d-flex justify-content-center mt-3">
             {% csrf_token %}
             <div class="col-sm-8 col-md-6 col-lg-5">
@@ -37,8 +38,9 @@
                     -->
                 </select>
             </div>
-            <button class="btn btn-custom btn-sm mx-4" type="submit" onclick="dataLayer.push({'event': 'download-btn'});">Baixar</button>
+            <button class="btn btn-custom btn-sm mx-4" type="submit" onclick="gtag('event', 'download_button', {'event_category': 'Button','event_label': 'Download Button'});">Baixar</button>
         </form>
+        <!-- Fim Formulario de Busca -->
 
         <img class="img-fluid" src="https://img.freepik.com/vetores-premium/pessoas-fazendo-upload-de-arquivos-multimidia-via-computador-musica-e-video-disponiveis-para-download-para-ilustracao-vetorial-plana-de-mulher-e-homem-minusculos-conceito-de-torrent-para-banner-design-de-site-ou-pagina-de-destino_179970-6866.jpg?w=1060" class="img-fluid" width="600" height="450" alt="PEssoas fazendo upload de arquivos multimidia">
 

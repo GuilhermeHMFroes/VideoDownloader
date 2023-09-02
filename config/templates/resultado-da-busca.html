@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block page_title %} Video Downloader {% endblock %}
+
+{% block page_content %}
+
+<div class="container">
+
+    <div class="text-center mt-5">
+        <!-- Formulario de Busca -->
+        <h2>Pesquise o vídeo que deseja</h2>
+        <form async method="POST" class="d-flex justify-content-center mt-3">
+            {% csrf_token %}
+            <div class="col-sm-8 col-md-6 col-lg-5">
+                <input class="form-control form-control-sm mb-2" type="text" placeholder="Insira o link do vídeo que deseja baixar" aria-label="Pesquisar" name="video_url" required>
+            </div>
+            <div class="col-sm-8 col-md-6 col-lg-2">
+                <select class="form-select form-select-sm mb-2 mx-3" aria-label="Selecione o formato" name="formato" required>
+                    <option selected>Selecione o formato</option>
+                    <option value="mp3" selected> MP3 128k</option>
+                    <option value="mp4"> MP4 </option>
+                    <!--
+                    <option value="mp4-720p">MP4 720p</option>
+                    <option value="mp4-480p">MP4 480p</option>
+                    -->
+                </select>
+            </div>
+            <button class="btn btn-custom btn-sm mx-4" type="submit" onclick="dataLayer.push({'event': 'download-btn'});">Baixar</button>
+        </form>
+        <!-- Fim Formulario de Busca -->
+    </div>
+
+
+    <div class="text-center mt-5 ">
+        <h2>Resultados da Busca</h2>
+    </div>
+
+    <div class="mt-5 ">
+        <div class="alert alert-info">
+            <p class=""> Clique no título do vídeo para assistí-lo no Youtube</p>
+        </div>
+        <table class="table table-rounded table-sm  mx-auto " style="max-width: 100%;">
+            <thead>
+                <tr style="background-color: #226900; color: white;">
+                    <th>{% comment %}Capa{% endcomment %}</th>
+                    <th>Título</th>
+                    {% comment %} <th>Autor</th> {% endcomment %}
+                    <th>Ações</th> <!-- Coluna vazia para o botão "Baixar Novamente" -->
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Exemplo de uma linha da tabela -->
+                {% for video in results %}
+                <tr>
+                    <td>
+                        <img src="{{ video.thumbnail_url }}" width="254px" class="thumbnail img-fluid">
+                    </td>
+                    <td>
+                        <a href="{{ video.video_url }}" target="_blank"> <strong>{{ video.title }}</strong> </a> <br>
+                        <p> <strong>Autor:</strong> {{ video.author }} </p>
+                    </td>
+                    <td>
+                        <form method="post" action="{% url 'index' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="video_url" value="{{ video.video_url }}">
+                            <select class="form-select form-select-md mb-3 mx-6" aria-label="Selecione o formato" name="formato" required>
+                                <option selected>Selecione o formato</option>
+                                <option value="mp3" selected> MP3 128k</option>
+                                <option value="mp4"> MP4 </option>
+                                <!--
+                                <option value="mp4-720p">MP4 720p</option>
+                                <option value="mp4-480p">MP4 480p</option>
+                                -->
+                            </select>
+                            <button class="btn btn-custom btn-md mb-3 mx-6" type="submit">Baixar</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

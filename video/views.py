@@ -3,6 +3,7 @@ from django.views.generic import TemplateView
 
 from .models import DownloadedVideos
 from .download import downloader
+from .search import search_videos
 
 from pytube import YouTube
 
@@ -13,11 +14,22 @@ class IndexView(TemplateView):
     async def get(self, request):
         """ View Index.
             Exibe o arquivo localizado em `/config/templates/index.html`
+
+            TODO: Search for a video on youtube
+            ### Parameters:
+            - search_term: string
         """
 
         context = {
             'download_options': ['mp3_128k', 'mp4'],
         }
+
+        if request.GET.get('search_term') is not None:
+            context = {
+                'results': search_videos(request.GET.get('search_term')),
+            }
+
+            return render(request, 'resultado-da-busca.html', context)
 
         return render(request, 'index.html', context)
     
@@ -40,49 +52,15 @@ class IndexView(TemplateView):
         
         response = await asyncio.to_thread(downloader, video_url, formato)
         return response
+    
+    async def put(self, request):
+        search_query = request.PUT.get('search_query')
+        results = search_videos(search_query)
 
 
 class VideoView(TemplateView):
-    def put(self, request):
-        """
-            TODO: Download video from YouTube
-            ### Body: 
-            - `file_url`: file url
-            - `file_type`: file type. Choices supported are: `mp3_128k` and `mp4`
-            
-            ### Limitations: 
-            - Only download video from YouTube.
-        """
-
-        # get file_type and file_url from Body
-
-        # TODO: Register in database the info about the file that was downloaded
-
-        return 'OK'
-
     def get(self, request):
-        """
-            TODO: Search for a video on youtube
-            ### Parameters:
-            - search_term: string
-        """     
-
-        # get search_term parameter from url
-
-        # return the all results of the search.
-        results = {
-            1: {
-                'thumbnail': '',
-                'title': '',
-                'description':'',
-                'views':'',
-                'duration':'',
-                'url':'',
-            },
-            2:{},
-            # ...
-        }
-        return results
+        pass
 
 
 class UserView(TemplateView):
